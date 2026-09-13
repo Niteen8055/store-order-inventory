@@ -8,6 +8,7 @@ use App\Domain\Order\Exceptions\InsufficientStockException;
 use App\Domain\Order\Models\Order;
 use App\Domain\Order\Services\OrderCalculationService;
 use App\Domain\Product\Models\Product;
+use App\Jobs\SendOrderConfirmationJob;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +74,8 @@ class CreateOrderAction
                 $product = $line['product'];
                 $product->decrement('stock_on_hand', $line['calculation']['quantity']);
             }
+
+            SendOrderConfirmationJob::dispatch($order->id)->afterCommit();
 
             return $order;
         }, 3);
