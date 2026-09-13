@@ -3,11 +3,17 @@
 namespace App\Domain\Product\Models;
 
 use App\Domain\Order\Models\OrderItem;
+use Database\Factories\ProductFactory;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[UseFactory(ProductFactory::class)]
 class Product extends Model
 {
+    use HasFactory;
+
     public $timestamps = false;
 
     /**
