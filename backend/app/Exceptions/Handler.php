@@ -25,14 +25,14 @@ class Handler extends ExceptionHandler
                 'product_id' => $exception->productId,
                 'requested_quantity' => $exception->requestedQuantity,
                 'available_quantity' => $exception->availableQuantity,
-            ], Response::HTTP_409);
+            ], Response::HTTP_CONFLICT);
         });
 
         $this->renderable(function (ModelNotFoundException $exception, Request $request): JsonResponse {
             return response()->json([
                 'message' => 'The requested resource was not found.',
                 'error' => 'resource_not_found',
-            ], Response::HTTP_404);
+            ], Response::HTTP_NOT_FOUND);
         });
 
         $this->renderable(function (ValidationException $exception, Request $request): JsonResponse {
@@ -40,14 +40,14 @@ class Handler extends ExceptionHandler
                 'message' => 'Validation failed.',
                 'error' => 'validation_failed',
                 'errors' => $exception->errors(),
-            ], Response::HTTP_422);
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
         });
 
         $this->renderable(function (Throwable $exception, Request $request): JsonResponse {
             return response()->json([
                 'message' => 'An unexpected error occurred.',
                 'error' => 'server_error',
-            ], Response::HTTP_500);
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         });
     }
 }
