@@ -1,18 +1,7 @@
 {
     "agents": [
-        "claude_code",
-        "amp",
-        "antigravity",
         "codex",
-        "cursor",
-        "factory",
-        "copilot",
-        "grok_build",
-        "junie",
-        "kiro",
-        "opencode",
-        "pi",
-        "zed"
+        "copilot"
     ],
     "cloud": false,
     "guidelines": true,
