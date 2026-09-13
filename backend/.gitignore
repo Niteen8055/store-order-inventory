@@ -36,3 +36,5 @@ Thumbs.db
 /.pi/
 /.zed/
 /.amp/
+
+.env.testing
