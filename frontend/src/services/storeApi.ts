@@ -9,6 +9,31 @@ export function isAxiosError(error: unknown): error is { response?: { data?: Err
   return axios.isAxiosError(error)
 }
 
+export function getErrorMessage(error: unknown, fallback = 'Request failed.'): string {
+  if (!isAxiosError(error)) {
+    return fallback
+  }
+
+  const payload = error.response?.data as ErrorPayload | undefined
+  if (!payload) {
+    return fallback
+  }
+
+  if (payload.error === 'validation_failed') {
+    return 'Validation failed. Review the request fields.'
+  }
+
+  if (payload.error === 'resource_not_found') {
+    return 'The requested resource was not found.'
+  }
+
+  if (payload.error === 'insufficient_stock') {
+    return 'Insufficient stock for the selected product.'
+  }
+
+  return payload.message ?? fallback
+}
+
 export async function createOrder(payload: CreateOrderPayload): Promise<Order> {
   const response = await api.post<{ data: Order }>('/v1/orders', payload)
   return response.data.data
