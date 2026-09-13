@@ -1,0 +1,28 @@
+{
+    "agents": [
+        "claude_code",
+        "amp",
+        "antigravity",
+        "codex",
+        "cursor",
+        "factory",
+        "copilot",
+        "grok_build",
+        "junie",
+        "kiro",
+        "opencode",
+        "pi",
+        "zed"
+    ],
+    "cloud": false,
+    "guidelines": true,
+    "mcp": true,
+    "nightwatch": false,
+    "sail": false,
+    "skills": [
+        "infer-conventions",
+        "laravel-best-practices",
+        "testing-best-practices",
+        "tailwindcss-development"
+    ]
+}
